@@ -36,4 +36,16 @@ public class TaskController {
         return taskService.createTask(text,completed);
     }
 
+    @MutationMapping
+    public Task modifyTask(@Argument int id, @Argument String text, @Argument boolean completed){
+        return taskService.modifyTask(id,text,completed);
+    }
+    
+    @MutationMapping
+    public Optional<Task> deleteTask(@Argument int id){
+        return taskService.deleteTask(id);
+    }
+
+
+
 }

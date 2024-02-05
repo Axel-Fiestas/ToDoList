@@ -12,4 +12,8 @@ public interface TaskService {
     Optional<Task> getTaskById(Integer id);
 
     Task createTask(String text,Boolean completed);
+
+    Task modifyTask(Integer id, String text, Boolean completed);
+
+    Optional<Task> deleteTask(Integer id);
 }

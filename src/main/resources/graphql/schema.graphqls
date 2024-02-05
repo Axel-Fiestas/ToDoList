@@ -5,6 +5,8 @@ type Query{
 
 type Mutation{
     createNewTask(text:String,completed:Boolean):Task
+    modifyTask(id:Int,text:String,completed:Boolean):Task
+    deleteTask(id:Int):Task
 }
 
 type Task{
