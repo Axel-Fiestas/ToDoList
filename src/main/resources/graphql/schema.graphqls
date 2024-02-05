@@ -1,0 +1,14 @@
+type Query{
+    taskById(id:ID): Task
+    getTasks:[Task]
+}
+
+type Mutation{
+    createNewTask(text:String,completed:Boolean):Task
+}
+
+type Task{
+    id: Int
+    text: String
+    completed: Boolean
+}
