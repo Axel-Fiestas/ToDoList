@@ -11,8 +11,13 @@ import java.util.Optional;
 @Service
 public class TaskServiceImpl implements TaskService{
 
-    @Autowired
+    final
     TaskRepository taskRepository;
+
+    public TaskServiceImpl(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
+
     @Override
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
@@ -21,5 +26,15 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public Optional<Task> getTaskById(Integer id) {
         return taskRepository.findById(id);
+    }
+
+    @Override
+    public Task createTask(String text, Boolean completed) {
+
+        Task newTask= Task.builder()
+                .text(text)
+                .completed(completed)
+                .build();
+        return taskRepository.save(newTask);
     }
 }

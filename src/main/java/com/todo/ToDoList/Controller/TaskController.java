@@ -4,6 +4,7 @@ import com.todo.ToDoList.Model.Task;
 import com.todo.ToDoList.Services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -13,8 +14,12 @@ import java.util.Optional;
 @Controller
 public class TaskController {
 
-    @Autowired
+    final
     TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @QueryMapping
     public List<Task> getTasks(){
@@ -26,8 +31,9 @@ public class TaskController {
         return taskService.getTaskById(id);
     }
 
-/*    @MutationMapping
-    public Task createNewTask(@Argument String text, @Argument boolean completed){
-        return Task.createTask(text,completed);
-    }*/
+    @MutationMapping
+    public Task createNewTask(@Argument String text,@Argument boolean completed){
+        return taskService.createTask(text,completed);
+    }
+
 }

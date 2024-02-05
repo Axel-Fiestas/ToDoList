@@ -6,10 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @Builder
 @Data
 @Entity
@@ -17,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "Task")
 public class Task{
-
     @Id
     @GeneratedValue
     Integer id;

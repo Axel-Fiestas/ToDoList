@@ -10,4 +10,6 @@ public interface TaskService {
     List<Task> getAllTasks();
 
     Optional<Task> getTaskById(Integer id);
+
+    Task createTask(String text,Boolean completed);
 }
