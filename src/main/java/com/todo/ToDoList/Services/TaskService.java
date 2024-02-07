@@ -15,5 +15,7 @@ public interface TaskService {
 
     Task modifyTask(Integer id, String text, Boolean completed);
 
+    Task modifyCompletedStatusTask(Integer id);
+
     Optional<Task> deleteTask(Integer id);
 }

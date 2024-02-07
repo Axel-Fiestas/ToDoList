@@ -1,3 +1,9 @@
+type Task{
+    id: Int
+    text: String!
+    completed: Boolean!
+}
+
 type Query{
     taskById(id:ID): Task
     getTasks:[Task]
@@ -6,11 +12,7 @@ type Query{
 type Mutation{
     createNewTask(text:String,completed:Boolean):Task
     modifyTask(id:Int,text:String,completed:Boolean):Task
+    modifyCompletedStatusTask(id:Int):Task
     deleteTask(id:Int):Task
 }
 
-type Task{
-    id: Int
-    text: String
-    completed: Boolean
-}

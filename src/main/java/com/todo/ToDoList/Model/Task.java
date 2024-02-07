@@ -11,15 +11,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Task")
-public class Task{
+@Table(name = "tasks") // Especifica el nombre de la tabla en la base de datos
+public class Task {
     @Id
-    @GeneratedValue
-    Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Configura la estrategia de generación de claves primarias
+    @Column(name = "id")
+    private Integer id;
+
     @Column(name = "text")
-    String text;
+    private String text;
+
     @Column(name = "completed")
-    Boolean completed;
+    private Boolean completed;
 }
 /*
 public record Task(int id, String text, boolean completed) {

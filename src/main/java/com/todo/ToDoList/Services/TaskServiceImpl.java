@@ -50,6 +50,16 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
+    public Task modifyCompletedStatusTask(Integer id) {
+        Optional<Task> actualTask= taskRepository.findById(id);
+        boolean status= actualTask.get().getCompleted();
+        actualTask.get().setCompleted(!status);
+        taskRepository.save(actualTask.get());
+        return actualTask.get();
+
+    }
+
+    @Override
     public Optional<Task> deleteTask(Integer id) {
         Optional<Task> task = taskRepository.findById(id);
         task.ifPresent(taskRepository::delete);

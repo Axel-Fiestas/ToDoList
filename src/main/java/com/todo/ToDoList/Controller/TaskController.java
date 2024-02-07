@@ -40,7 +40,12 @@ public class TaskController {
     public Task modifyTask(@Argument int id, @Argument String text, @Argument boolean completed){
         return taskService.modifyTask(id,text,completed);
     }
-    
+
+    @MutationMapping
+    public Task modifyCompletedStatusTask(@Argument int id){
+        return taskService.modifyCompletedStatusTask(id);
+    }
+
     @MutationMapping
     public Optional<Task> deleteTask(@Argument int id){
         return taskService.deleteTask(id);

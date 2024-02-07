@@ -9,8 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseInitializer implements CommandLineRunner {
 
-    @Autowired
+    final
     TaskRepository taskRepository;
+
+    public DatabaseInitializer(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     @Override
     public void run(String... args){
