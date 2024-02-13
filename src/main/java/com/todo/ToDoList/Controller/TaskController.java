@@ -1,17 +1,20 @@
 package com.todo.ToDoList.Controller;
 
+import com.todo.ToDoList.Dto.CreateTaskDto;
+import com.todo.ToDoList.Dto.ModifyTaskDto;
 import com.todo.ToDoList.Model.Task;
 import com.todo.ToDoList.Services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
-import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+
+@RestController
+@RequestMapping("api/")
 public class TaskController {
 
     final
@@ -21,33 +24,37 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @QueryMapping
-    public List<Task> getTasks(){
+    @Transactional(readOnly = true)
+    @GetMapping("/tasks")
+    public List<Task> getTasks() {
         return taskService.getAllTasks();
     }
 
-    @QueryMapping
-    public Optional<Task> taskById(@Argument int id){
+    @Transactional(readOnly = true)
+    @GetMapping("/tasks/{id}")
+    public Optional<Task> taskById(@PathVariable int id){
         return taskService.getTaskById(id);
     }
 
-    @MutationMapping
-    public Task createNewTask(@Argument String text,@Argument boolean completed){
-        return taskService.createTask(text,completed);
+    @PostMapping("tasks")
+    public Task createNewTask(@RequestBody CreateTaskDto createTaskDto){
+        return taskService.createTask(createTaskDto);
     }
 
-    @MutationMapping
-    public Task modifyTask(@Argument int id, @Argument String text, @Argument boolean completed){
-        return taskService.modifyTask(id,text,completed);
+    @Transactional()
+    @PutMapping("tasks/{id}")
+    public Task modifyTask(@PathVariable int id, @RequestBody ModifyTaskDto modifyTaskDto){
+        return taskService.modifyTask(id,modifyTaskDto);
     }
 
-    @MutationMapping
-    public Task modifyCompletedStatusTask(@Argument int id){
+    @Transactional()
+    @PutMapping("tasks/status/{id}")
+    public Task modifyCompletedStatusTask(@PathVariable int id){
         return taskService.modifyCompletedStatusTask(id);
     }
-
-    @MutationMapping
-    public Optional<Task> deleteTask(@Argument int id){
+    @Transactional()
+    @DeleteMapping("tasks/delete/{id}")
+    public Optional<Task> deleteTask(@PathVariable int id){
         return taskService.deleteTask(id);
     }
 

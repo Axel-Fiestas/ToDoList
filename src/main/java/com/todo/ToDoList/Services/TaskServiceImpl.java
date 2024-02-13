@@ -1,5 +1,7 @@
 package com.todo.ToDoList.Services;
 
+import com.todo.ToDoList.Dto.CreateTaskDto;
+import com.todo.ToDoList.Dto.ModifyTaskDto;
 import com.todo.ToDoList.Model.Task;
 import com.todo.ToDoList.Repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -28,22 +30,22 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public Task createTask(String text, Boolean completed) {
+    public Task createTask(CreateTaskDto createTaskDto) {
 
         Task newTask= Task.builder()
-                .text(text)
-                .completed(completed)
+                .text(createTaskDto.text())
+                .completed(false)
                 .build();
         return taskRepository.save(newTask);
     }
 
     @Override
-    public Task modifyTask(Integer id, String text, Boolean completed) {
+    public Task modifyTask(Integer id, ModifyTaskDto modifyTaskDto) {
 
 
         Optional<Task> actualTask= taskRepository.findById(id);
-        actualTask.get().setText(text);
-        actualTask.get().setCompleted(completed);
+        actualTask.get().setText(modifyTaskDto.text());
+        actualTask.get().setCompleted(modifyTaskDto.completed());
         taskRepository.save(actualTask.get());
 
         return actualTask.get();

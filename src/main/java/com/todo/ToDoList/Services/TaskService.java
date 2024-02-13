@@ -1,5 +1,7 @@
 package com.todo.ToDoList.Services;
 
+import com.todo.ToDoList.Dto.CreateTaskDto;
+import com.todo.ToDoList.Dto.ModifyTaskDto;
 import com.todo.ToDoList.Model.Task;
 
 import java.util.List;
@@ -11,9 +13,9 @@ public interface TaskService {
 
     Optional<Task> getTaskById(Integer id);
 
-    Task createTask(String text,Boolean completed);
+    Task createTask(CreateTaskDto createTaskDto);
 
-    Task modifyTask(Integer id, String text, Boolean completed);
+    Task modifyTask(Integer id, ModifyTaskDto modifyTaskDto);
 
     Task modifyCompletedStatusTask(Integer id);
 
